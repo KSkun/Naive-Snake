@@ -48,10 +48,10 @@ public class SnakeClient {
     public void move(Direction dir) throws Exception {
         String msg = null;
         switch (dir) {
-            case UP -> msg = "w";
-            case DOWN -> msg = "s";
-            case LEFT -> msg = "a";
-            case RIGHT -> msg = "d";
+            case UP: msg = "w"; break;
+            case DOWN: msg = "s"; break;
+            case LEFT: msg = "a"; break;
+            case RIGHT: msg = "d"; break;
         }
         send(msg);
     }

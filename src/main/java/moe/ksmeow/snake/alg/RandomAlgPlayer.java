@@ -7,13 +7,13 @@ public class RandomAlgPlayer extends AlgPlayerCheat {
 
     @Override
     public SnakeClient.Direction play(int[][] map) {
-        return switch (Math.abs(NaiveSnake.rand.nextInt()) % 4) {
-            case 0 -> SnakeClient.Direction.UP;
-            case 1 -> SnakeClient.Direction.DOWN;
-            case 2 -> SnakeClient.Direction.LEFT;
-            case 3 -> SnakeClient.Direction.RIGHT;
-            default -> null;
-        };
+        switch (Math.abs(NaiveSnake.rand.nextInt()) % 4) {
+            case 0: return SnakeClient.Direction.UP;
+            case 1: return SnakeClient.Direction.DOWN;
+            case 2: return SnakeClient.Direction.LEFT;
+            case 3: return SnakeClient.Direction.RIGHT;
+            default: return null;
+        }
     }
 
 }

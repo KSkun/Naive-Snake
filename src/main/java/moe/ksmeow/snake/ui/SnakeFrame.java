@@ -35,10 +35,10 @@ public class SnakeFrame extends JFrame implements KeyListener {
         if (!NaiveSnake.MANUAL || !NaiveSnake.gameRunning) return;
         try {
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP -> NaiveSnake.client.move(SnakeClient.Direction.UP);
-                case KeyEvent.VK_DOWN -> NaiveSnake.client.move(SnakeClient.Direction.DOWN);
-                case KeyEvent.VK_LEFT -> NaiveSnake.client.move(SnakeClient.Direction.LEFT);
-                case KeyEvent.VK_RIGHT -> NaiveSnake.client.move(SnakeClient.Direction.RIGHT);
+                case KeyEvent.VK_UP: NaiveSnake.client.move(SnakeClient.Direction.UP); break;
+                case KeyEvent.VK_DOWN: NaiveSnake.client.move(SnakeClient.Direction.DOWN); break;
+                case KeyEvent.VK_LEFT: NaiveSnake.client.move(SnakeClient.Direction.LEFT); break;
+                case KeyEvent.VK_RIGHT: NaiveSnake.client.move(SnakeClient.Direction.RIGHT); break;
             }
             Thread.sleep(1000);
             updateMap(NaiveSnake.dump.getMap());

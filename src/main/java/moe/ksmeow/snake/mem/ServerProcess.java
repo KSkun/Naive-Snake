@@ -46,6 +46,10 @@ public class ServerProcess {
         this(8080, _seed);
     }
 
+    public void waitFor() throws Exception {
+        process.waitFor();
+    }
+
     public Process getProcess() {
         return process;
     }

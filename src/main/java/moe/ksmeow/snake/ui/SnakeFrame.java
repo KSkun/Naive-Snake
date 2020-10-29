@@ -32,7 +32,7 @@ public class SnakeFrame extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (!NaiveSnake.MANUAL) return;
+        if (!NaiveSnake.MANUAL || !NaiveSnake.gameRunning) return;
         try {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP -> NaiveSnake.client.move(SnakeClient.Direction.UP);

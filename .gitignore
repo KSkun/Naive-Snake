@@ -1,5 +1,7 @@
 ### Custom rules
 *.txt
+*.cmd
+*.dump
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Gradle template

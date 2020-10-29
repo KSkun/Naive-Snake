@@ -6,7 +6,7 @@ import moe.ksmeow.snake.client.SnakeClient;
 public class RandomAlgPlayer extends AlgPlayerCheat {
 
     @Override
-    public SnakeClient.Direction play(int[][] map) {
+    public SnakeClient.Direction play(int[][] map, int x, int y) {
         switch (Math.abs(NaiveSnake.rand.nextInt()) % 4) {
             case 0: return SnakeClient.Direction.UP;
             case 1: return SnakeClient.Direction.DOWN;

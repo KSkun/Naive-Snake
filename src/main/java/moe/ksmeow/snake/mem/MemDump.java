@@ -74,7 +74,7 @@ public class MemDump {
         IntBuffer buf = ByteBuffer.wrap(bytesMap).order(ByteOrder.LITTLE_ENDIAN).asIntBuffer();
         for (int i = 0; i < NaiveSnake.MAP_SIZE; i++) {
             for (int j = 0; j < NaiveSnake.MAP_SIZE; j++) {
-                map[i][j] = buf.get(i * NaiveSnake.MAP_SIZE + j);
+                map[j][i] = buf.get(i * NaiveSnake.MAP_SIZE + j);
             }
         }
     }

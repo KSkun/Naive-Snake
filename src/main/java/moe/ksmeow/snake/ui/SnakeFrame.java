@@ -40,7 +40,7 @@ public class SnakeFrame extends JFrame implements KeyListener {
                 case KeyEvent.VK_LEFT: NaiveSnake.client.move(SnakeClient.Direction.LEFT); break;
                 case KeyEvent.VK_RIGHT: NaiveSnake.client.move(SnakeClient.Direction.RIGHT); break;
             }
-            Thread.sleep(1000);
+            Thread.sleep(10);
             updateMap(NaiveSnake.dump.getMap());
         } catch (Exception exception) {
             exception.printStackTrace();

@@ -40,7 +40,7 @@ public class SnakePanel extends JPanel {
 
     private void drawRect(Graphics g, int x, int y, Color color) {
         g.setColor(color);
-        g.fillRect(x * RECT_SIZE, y * RECT_SIZE, RECT_SIZE, RECT_SIZE);
+        g.fillRect(y * RECT_SIZE, x * RECT_SIZE, RECT_SIZE, RECT_SIZE);
     }
 
     public void setMap(int[][] _map) {

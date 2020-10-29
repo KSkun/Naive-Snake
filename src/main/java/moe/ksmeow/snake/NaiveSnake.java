@@ -103,7 +103,7 @@ public class NaiveSnake {
         log.info(file + " starting on port " + port + " with pid " + server.getPid());
         gameRunning = true;
 
-        Thread.sleep(2000); // wait for map generation
+        Thread.sleep(1000); // wait for map generation
 
         // prepare dump info
         log.info("dump preparing");

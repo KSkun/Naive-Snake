@@ -16,19 +16,20 @@ public class PlayerThread extends Thread {
             SnakeClient.View view = NaiveSnake.client.getView();
             SnakeClient.Direction dir = player.play(view);
             NaiveSnake.client.move(dir);
+            Thread.sleep(10); // wait for map refresh
             NaiveSnake.window.updateMap(NaiveSnake.dump.getMap());
-            Thread.sleep(2000); // wait for map refresh
         }
     }
 
     private void runCheat(AlgPlayerCheat player) throws Exception {
         int[][] lastMap = NaiveSnake.dump.getMap();
         while (NaiveSnake.gameRunning) {
-            SnakeClient.Direction dir = player.play(lastMap);
+            SnakeClient.View view = NaiveSnake.client.getView();
+            SnakeClient.Direction dir = player.play(lastMap, view.x, view.y);
             NaiveSnake.client.move(dir);
+            Thread.sleep(10); // wait for map refresh
             lastMap = NaiveSnake.dump.getMap();
             NaiveSnake.window.updateMap(lastMap);
-            Thread.sleep(2000); // wait for map refresh
         }
     }
 

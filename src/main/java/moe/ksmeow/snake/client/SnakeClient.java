@@ -74,11 +74,11 @@ public class SnakeClient {
         view.x = json.get("x").getAsInt();
         view.y = json.get("y").getAsInt();
         JsonArray viewArr = json.get("view").getAsJsonArray();
-        int viewSize = viewArr.size();
-        view.view = new int[viewSize][viewSize];
-        for (int i = 0; i < viewSize; i++) {
+        int viewSizeX = viewArr.size(), viewSizeY = viewArr.get(0).getAsJsonArray().size();
+        view.view = new int[viewSizeX][viewSizeY];
+        for (int i = 0; i < viewSizeX; i++) {
             JsonArray arr = viewArr.get(i).getAsJsonArray();
-            for (int j = 0; j < viewSize; j++) {
+            for (int j = 0; j < viewSizeY; j++) {
                 view.view[i][j] = arr.get(j).getAsInt();
             }
         }

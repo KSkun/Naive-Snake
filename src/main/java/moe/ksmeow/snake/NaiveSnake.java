@@ -67,7 +67,7 @@ public class NaiveSnake {
         // server parameters
         String file = "subg.client";
         int port = (Math.abs(NaiveSnake.rand.nextInt()) + 1000) % 65536;
-        String seed = "2020";
+        String seed = "41420402";
 
         log.info(APP_NAME + " " + VERSION + " starting");
 

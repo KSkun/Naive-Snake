@@ -1,8 +1,8 @@
 package moe.ksmeow.snake.mem;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
+import moe.ksmeow.snake.NaiveSnake;
+
+import java.io.*;
 
 /**
  * @author KSkun
@@ -59,7 +59,7 @@ public class MemUtil {
         // cmd: gdb attach pid < pid_gdb.cmd
         String[] cmds = {"bash", "-c", "gdb attach " + pid + " < " + filenameGdbCmd};
         Process procGdb = Runtime.getRuntime().exec(cmds);
-        /*// ###### DEBUG ######
+        // ###### DEBUG ######
         BufferedReader readerProcGdb = new BufferedReader(new InputStreamReader(procGdb.getInputStream()));
         if (NaiveSnake.DEBUG) {
             String _line;
@@ -68,7 +68,7 @@ public class MemUtil {
                 if (_line != null) System.out.println(_line);
             }
         }
-        // ###### DEBUG ######*/
+        // ###### DEBUG ######
         procGdb.waitFor();
         fileGdbCmd.delete();
 

@@ -31,9 +31,9 @@ public class LivingPlayer extends AlgPlayerCheat {
         if (vis[x][y]) return -1e9;
         vis[x][y] = true;
         double thisValue = 0;
-        if (map[x][y] == 4) thisValue = -2;
-        if (map[x][y] == 5) thisValue = 1;
-        if (map[x][y] == 6) thisValue = 5;
+        if (map[x][y] == 4) thisValue = -1; // opt: -1
+        if (map[x][y] == 5) thisValue = 1; // opt: -1
+        if (map[x][y] == 6) thisValue = 4; // opt: 4
         int notStepCount = cannotStep(map, x - 1, y) + cannotStep(map, x + 1, y) +
                 cannotStep(map, x, y - 1) + cannotStep(map, x, y + 1);
         if (map[x][y] == 1 || map[x][y] == 2 || map[x][y] >= 8) {//|| notStepCount >= 3) {
@@ -43,17 +43,18 @@ public class LivingPlayer extends AlgPlayerCheat {
         //if (bodyInd[x][y]) {
         //    thisValue -= 5;
         //} else {
-            thisValue *= Math.max(0.5, disConst);
+            thisValue *= disConst;//Math.max(0.5, disConst); // opt: *= disConst
         //}
         maxValue[x][y] = thisValue;
-        if (dep > Math.max(100, len * 1.5)) {
+        if (dep > 200) {//Math.max(100, len * 1.5)) { // opt: 200
             return thisValue;
         }
         for (int i = 0; i < 4; i++) {
             int nextX = x + DIR_TO_POS_DIFF[0][i], nextY = y + DIR_TO_POS_DIFF[1][i];
             if (isPositionInvalid(nextX, nextY)) continue;
             double res = thisValue +
-                    dfs(dep + 1, map, maxValue, nextDir, vis, bodyInd, nextX, nextY, len, disConst * 0.98);
+                    dfs(dep + 1, map, maxValue, nextDir, vis, bodyInd, nextX, nextY, len,
+                            disConst * 0.9995); // opt: 0.9995
             if (res > maxValue[x][y]) {
                 maxValue[x][y] = res;
                 nextDir[x][y] = i;
@@ -117,7 +118,7 @@ public class LivingPlayer extends AlgPlayerCheat {
             }
         }
         maxValue[x][y] = -1e9;
-        if (len > 20) doBodyBlock(map, x, y, bodyInd);
+        //if (len > 20) doBodyBlock(map, x, y, bodyInd);
         List<Integer> dirs = Arrays.asList(0, 1, 2, 3);
         Collections.shuffle(dirs);
         for (int i = 0; i < 4; i++) {

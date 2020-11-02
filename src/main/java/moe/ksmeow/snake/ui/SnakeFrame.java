@@ -11,8 +11,8 @@ public class SnakeFrame extends JFrame implements KeyListener {
 
     private final SnakePanel panel;
 
-    public SnakeFrame(int[][] map) {
-        super(NaiveSnake.APP_NAME + " " + NaiveSnake.VERSION);
+    public SnakeFrame(String seed, int[][] map) {
+        super(NaiveSnake.APP_NAME + " " + NaiveSnake.VERSION + " (seed: " + seed + ")");
         this.setSize(SnakePanel.RECT_SIZE * NaiveSnake.MAP_SIZE,
                 SnakePanel.RECT_SIZE * NaiveSnake.MAP_SIZE + 50); // needs larger height for magic reason
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +32,7 @@ public class SnakeFrame extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (!NaiveSnake.MANUAL || !NaiveSnake.gameRunning) return;
+        if (/*!NaiveSnake.MANUAL || */!NaiveSnake.gameRunning) return;
         try {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP: NaiveSnake.client.move(SnakeClient.Direction.UP); break;

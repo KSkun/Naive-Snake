@@ -20,7 +20,7 @@ public class NaiveSnake {
 
     public static final String APP_NAME = "NaiveSnake", VERSION = "1.0";
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     public static boolean MANUAL;
 
@@ -67,7 +67,7 @@ public class NaiveSnake {
         // server parameters
         String file = "subg.client";
         int port = (Math.abs(NaiveSnake.rand.nextInt()) + 1000) % 65536;
-        String seed = "41420402";
+        String seed = "233820437";
 
         log.info(APP_NAME + " " + VERSION + " starting");
 
@@ -118,7 +118,7 @@ public class NaiveSnake {
 
         // init the ui
         log.info("ui starting");
-        window = new SnakeFrame(dump.getMap());
+        window = new SnakeFrame(seed, dump.getMap());
         window.setVisible(true);
         log.info("ui is ready");
 

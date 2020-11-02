@@ -34,6 +34,18 @@ public class MemDump {
         getOffset();
     }
 
+    private boolean getOffsetInBlock(long beg, long end) throws Exception {
+        byte[] bytes = MemUtil.dumpMemory(pid, beg, end);
+        byte[] bytesToFind = ("\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0" +
+                "\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0").getBytes(); // [\x01\x00\x00\x00] * 10
+        int offset = Bytes.indexOf(bytes, bytesToFind);
+        if (offset == -1) return false;
+        heapBegin = beg;
+        heapEnd = end;
+        heapOffset = offset;
+        return true;
+    }
+
     /**
      * Find the offset of the memory region storing the map data.
      * @throws Exception
@@ -49,17 +61,18 @@ public class MemDump {
             matcher.find();
             strBeg = matcher.group(1);
             strEnd = matcher.group(2);
+            long beg = Long.valueOf(strBeg, 16), end = Long.valueOf(strEnd, 16);
+            if (getOffsetInBlock(beg, end)) break;
+
+            // mapped block
+            line = readerMaps.readLine();
+            Matcher _matcher = Pattern.compile("([0-9A-Fa-f]+)-([0-9A-Fa-f]+)").matcher(line);
+            _matcher.find();
+            strBeg = _matcher.group(1);
+            strEnd = _matcher.group(2);
+            long _beg = Long.valueOf(strBeg, 16), _end = Long.valueOf(strEnd, 16);
+            if (!getOffsetInBlock(_beg, _end)) throw new Exception("map not found in pid " + pid);
         }
-        heapBegin = Long.valueOf(strBeg, 16);
-        heapEnd = Long.valueOf(strEnd, 16);
-
-        // dump mem
-        byte[] bytesHeap = MemUtil.dumpMemory(pid, heapBegin, heapEnd);
-
-        // find the map
-        byte[] bytesToFind = ("\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0" +
-                "\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0").getBytes(); // [\x01\x00\x00\x00] * 10
-        heapOffset = Bytes.indexOf(bytesHeap, bytesToFind);
     }
 
     /**
